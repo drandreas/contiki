@@ -29,16 +29,16 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * \addtogroup cc2538-smartrf
+ * \addtogroup openmote-cc2538
  * @{
  *
- * \defgroup cc2538dk-leds SmartRF06EB LED driver
+ * \defgroup openmote-cc2538-leds OpenMote-CC2538 LED driver
  *
- * LED driver implementation for the TI SmartRF06EB + cc2538EM
+ * LED driver implementation for the OpenMote-CC2538
  * @{
  *
  * \file
- * LED driver implementation for the TI SmartRF06EB + cc2538EM
+ * LED driver implementation for the OpenMote-CC2538
  */
 #include "contiki.h"
 #include "reg.h"
@@ -46,6 +46,7 @@
 #include "dev/gpio.h"
 
 #define LEDS_GPIO_PIN_MASK   LEDS_ALL
+
 /*---------------------------------------------------------------------------*/
 void
 leds_arch_init(void)

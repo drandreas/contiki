@@ -29,28 +29,24 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * \addtogroup cc2538-smartrf
+ * \addtogroup openmote-cc2538
  * @{
  *
- * \defgroup cc2538-smartrf-sensors SmartRF06EB Sensors
+ * \defgroup openmote-cc2538-sensors OpenMote-CC2538 Sensors
  *
- * Generic module controlling sensors on the SmartRF06EB
+ * Generic module controlling sensors on the OpenMote-CC2538
  * @{
  *
  * \file
- * Implementation of a generic module controlling SmartRF06EB sensors
+ * Implementation of a generic module controlling OpenMote-CC2538 sensors
  */
 #include "contiki.h"
 #include "dev/button-sensor.h"
-#include "dev/als-sensor.h"
-#include "dev/cc2538-sensors.h"
 
 #include <string.h>
 
 /** \brief Exports a global symbol to be used by the sensor API */
-SENSORS(&button_select_sensor, &button_left_sensor, &button_right_sensor,
-        &button_up_sensor, &button_down_sensor, &als_sensor,
-        &cc2538_temp_sensor, &vdd3_sensor);
+SENSORS(&button_user_sensor);
 
 /**
  * @}

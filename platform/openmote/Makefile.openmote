@@ -1,4 +1,4 @@
-# cc2538dk platform makefile
+# openmote platform makefile
 
 ifndef CONTIKI
   $(error CONTIKI not defined! You must specify where CONTIKI resides!)
@@ -9,11 +9,12 @@ CONTIKI_TARGET_DIRS = . dev
 CONTIKI_TARGET_SOURCEFILES += leds.c leds-arch.c
 CONTIKI_TARGET_SOURCEFILES += contiki-main.c
 CONTIKI_TARGET_SOURCEFILES += sensors.c smartrf-sensors.c
-CONTIKI_TARGET_SOURCEFILES += button-sensor.c als-sensor.c
+CONTIKI_TARGET_SOURCEFILES += button-sensor.c smartrf-sensors.c
+CONTIKI_TARGET_SOURCEFILES += antenna.c tps62730.c
 
 CONTIKI_SOURCEFILES += $(CONTIKI_TARGET_SOURCEFILES)
 
-CLEAN += *.cc2538dk
+CLEAN += *.openmote
 
 ### Unless the example dictates otherwise, build with code size optimisations
 ifndef SMALL

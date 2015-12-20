@@ -1,9 +1,9 @@
 /**
- * \addtogroup cc2538dk
+ * \addtogroup openmote
  * @{
  *
  * \file
- *  Configuration for the cc2538dk platform
+ *  Configuration for the OpenMote-CC2538 platform
  */
 #ifndef CONTIKI_CONF_H_
 #define CONTIKI_CONF_H_
@@ -285,7 +285,7 @@ typedef uint32_t rtimer_clock_t;
 #endif
 
 #ifndef NETSTACK_CONF_RDC
-#define NETSTACK_CONF_RDC     contikimac_driver
+#define NETSTACK_CONF_RDC     nullrdc_driver
 #endif
 
 /* Configure NullRDC for when it's selected */

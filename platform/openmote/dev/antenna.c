@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Texas Instruments Incorporated - http://www.ti.com/
+ * Copyright (c) 2014, Thingsquare, http://www.thingsquare.com/.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,6 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- *
  * 3. Neither the name of the copyright holder nor the names of its
  *    contributors may be used to endorse or promote products derived
  *    from this software without specific prior written permission.
@@ -27,36 +26,63 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
  */
-/**
- * \addtogroup openmote-cc2538
- * @{
- *
- * \defgroup openmote-cc2538-button-sensor OpenMote-CC2538 Button Driver
- *
- * Driver for the OpenMote-CC2538 buttons
- * @{
- *
- * \file
- * Header file for the OpenMote-CC2538 Button Driver
- */
-#ifndef BUTTON_SENSOR_H_
-#define BUTTON_SENSOR_H_
 
-#include "lib/sensors.h"
+#include "contiki-conf.h"
 #include "dev/gpio.h"
+#include "antenna.h"
 
-#define BUTTON_SENSOR "Button"
+#define BSP_RADIO_BASE              (GPIO_D_BASE)
+#define BSP_RADIO_INT               (1 << 5)
+#define BSP_RADIO_EXT               (1 << 4)
 
-#define button_sensor button_user_sensor
-extern const struct sensors_sensor button_user_sensor;
 /*---------------------------------------------------------------------------*/
-#endif /* BUTTON_SENSOR_H_ */
-
-/** \brief Common initialiser for all SmartRF Buttons */
-void button_sensor_init();
-
+static void
+gpio_set(int port, int bit)
+{
+  REG((port | GPIO_DATA) + (bit << 2)) = bit;
+}
+/*---------------------------------------------------------------------------*/
+static void
+gpio_reset(int port, int bit)
+{
+  REG((port | GPIO_DATA) + (bit << 2)) = 0;
+}
+/*---------------------------------------------------------------------------*/
 /**
- * @}
- * @}
+ * Configure the antenna using the RF switch
+ * INT is the internal antenna (chip) configured through ANT1_SEL (V1)
+ * EXT is the external antenna (connector) configured through ANT2_SEL (V2)
  */
+void
+antenna_init(void)
+{
+  /* Configure the ANT1 and ANT2 GPIO as output */
+  GPIO_SET_OUTPUT(BSP_RADIO_BASE, BSP_RADIO_INT);
+  GPIO_SET_OUTPUT(BSP_RADIO_BASE, BSP_RADIO_EXT);
+
+  /* Select external antenna by default. */
+  antenna_external();
+ }
+/*---------------------------------------------------------------------------*/
+/**
+ * Select the external (connector) antenna
+ */
+void
+antenna_external(void)
+{
+  gpio_reset(BSP_RADIO_BASE, BSP_RADIO_INT);
+  gpio_set(BSP_RADIO_BASE, BSP_RADIO_EXT);
+}
+/*---------------------------------------------------------------------------*/
+/**
+ * Select the internal (chip) antenna
+ */
+void
+antenna_internal(void)
+{
+  gpio_reset(BSP_RADIO_BASE, BSP_RADIO_EXT);
+  gpio_set(BSP_RADIO_BASE, BSP_RADIO_INT);
+}
+/*---------------------------------------------------------------------------*/

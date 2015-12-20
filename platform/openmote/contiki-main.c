@@ -29,21 +29,22 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * \addtogroup cc2538-platforms
+ * \addtogroup platform
  * @{
  *
- * \defgroup cc2538dk The cc2538 Development Kit platform
+ * \defgroup cc2538 The OpenMote-CC2538 platform
  *
- * The cc2538DK is a platform by Texas Instruments, based on the
- * cc2538 SoC with an ARM Cortex-M3 core.
+ * The OpenMote-CC2538 is based on the CC2538, the new platform by Texas Instruments
+ * based on an ARM Cortex-M3 core and a IEEE 802.15.4 radio.
  * @{
  *
  * \file
- *   Main module for the cc2538dk platform
+ *   Main module for the OpenMote-CC2538 platform
  */
 /*---------------------------------------------------------------------------*/
 #include "contiki.h"
-#include "dev/adc.h"
+#include "dev/antenna.h"
+#include "dev/tps62730.h"
 #include "dev/leds.h"
 #include "dev/sys-ctrl.h"
 #include "dev/scb.h"
@@ -135,7 +136,7 @@ set_rf_params(void)
 }
 /*---------------------------------------------------------------------------*/
 /**
- * \brief Main routine for the cc2538dk platform
+ * \brief Main routine for the OpenMote-CC2538 platform
  */
 int
 main(void)
@@ -191,6 +192,10 @@ main(void)
   PRINTF("%s\n", NETSTACK_MAC.name);
   PRINTF(" RDC: ");
   PRINTF("%s\n", NETSTACK_RDC.name);
+  PRINTF(" Channel: ");
+  PRINTF("%d\n", CC2538_RF_CHANNEL);
+  PRINTF(" PAN-ID: ");
+  PRINTF("%x\n", IEEE802154_PANID);
 
   /* Initialise the H/W RNG engine. */
   random_init(0);
@@ -209,7 +214,9 @@ main(void)
   process_start(&tcpip_process, NULL);
 #endif /* NETSTACK_CONF_WITH_IPV6 */
 
-  adc_init();
+  antenna_init();
+  PRINTF(" Antenna: external\n");
+  tps62730_init();
 
   process_start(&sensors_process, NULL);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Texas Instruments Incorporated - http://www.ti.com/
+ * Copyright (c) 2014, OpenMote Technologies, http://www.openmote.com/.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,6 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- *
  * 3. Neither the name of the copyright holder nor the names of its
  *    contributors may be used to endorse or promote products derived
  *    from this software without specific prior written permission.
@@ -27,36 +26,14 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-/**
- * \addtogroup openmote-cc2538
- * @{
  *
- * \defgroup openmote-cc2538-button-sensor OpenMote-CC2538 Button Driver
- *
- * Driver for the OpenMote-CC2538 buttons
- * @{
- *
- * \file
- * Header file for the OpenMote-CC2538 Button Driver
  */
-#ifndef BUTTON_SENSOR_H_
-#define BUTTON_SENSOR_H_
 
-#include "lib/sensors.h"
-#include "dev/gpio.h"
+#ifndef TPS62730_H_
+#define TPS62730_H_
 
-#define BUTTON_SENSOR "Button"
+void tps62730_init(void);
+void tps62730_on(void);
+void tps62730_bypass(void);
 
-#define button_sensor button_user_sensor
-extern const struct sensors_sensor button_user_sensor;
-/*---------------------------------------------------------------------------*/
-#endif /* BUTTON_SENSOR_H_ */
-
-/** \brief Common initialiser for all SmartRF Buttons */
-void button_sensor_init();
-
-/**
- * @}
- * @}
- */
+#endif /* TPS62730_H_ */
