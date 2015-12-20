@@ -3,7 +3,7 @@
 	url = https://github.com/contiki-os/mspsim.git
 [submodule "tools/cc2538-bsl"]
 	path = tools/cc2538-bsl
-	url = https://github.com/JelmerT/cc2538-bsl.git
+	url = https://github.com/drandreas/cc2538-bsl.git
 [submodule "cpu/cc26xx-cc13xx/lib/cc26xxware"]
 	path = cpu/cc26xx-cc13xx/lib/cc26xxware
 	url = https://github.com/g-oikonomou/cc26xxware.git

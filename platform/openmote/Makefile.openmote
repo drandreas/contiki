@@ -30,7 +30,7 @@ MODULES += core/net core/net/mac \
            core/net/llsec
 
 PYTHON = python
-BSL_FLAGS += -e -w -v
+BSL_FLAGS += -b 25000 -o 253 -e -w -v
 
 ifdef PORT
   BSL_FLAGS += -p $(PORT)
